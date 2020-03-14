@@ -4,10 +4,11 @@ import {
   View,
   TextInput,
   Text,
+  Image,
   StyleSheet,
   ImageBackground,
 } from 'react-native';
-import {Button, Icon, Card} from 'react-native-elements';
+import {Button, Card} from 'react-native-elements';
 export default class Login extends Component {
   constructor() {
     super();
@@ -22,9 +23,14 @@ export default class Login extends Component {
         source={require('../Images/background.jpg')}
         style={{width: '100%', height: '100%'}}>
         <View style={{margin: 10}}>
-          <Card title="WELCOME" image={require('../Images/background.jpg')}>
+          <Card title="WELCOME">
+            <View style= {{alignItems: 'center'}}>
+              <Image
+                source={require('../Images/hislogo.png')}
+                style={{width: 200, height: 200}}
+              />
+            </View>
             <View style={styles.textInputContainer}>
-              <Icon name="user" type="font-awesome" />
               <TextInput
                 style={styles.inputStyle}
                 autoCorrect={false}
@@ -34,7 +40,6 @@ export default class Login extends Component {
               />
             </View>
             <View style={styles.textInputContainer}>
-              <Icon name="lock" type="font-awesome" />
               <TextInput
                 style={styles.inputStyle}
                 autoCorrect={false}
