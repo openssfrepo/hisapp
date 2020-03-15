@@ -24,7 +24,7 @@ export default class Login extends Component {
         style={{width: '100%', height: '100%'}}>
         <View style={{margin: 10}}>
           <Card title="WELCOME">
-            <View style= {{alignItems: 'center'}}>
+            <View style={{alignItems: 'center'}}>
               <Image
                 source={require('../Images/hislogo.png')}
                 style={{width: 200, height: 200}}
@@ -58,21 +58,31 @@ export default class Login extends Component {
                 Forgot password
               </Text>
             </View>
-            <Button
-              style={{marginTop: 2}}
-              title="LOGIN"
-              type="solid"
-              onPress={() => this._onPressLoginButton()}
-            />
-            <View style={{alignItems: 'center'}}>
+            <View>
+              <Button
+                style={{marginTop: 2}}
+                title="LOGIN"
+                type="solid"
+                onPress={() => this._onPressLoginButton()}
+              />
+            </View>
+            <View style={{alignItems: 'center', marginTop: 5}}>
               <Text>or</Text>
             </View>
-            <Button
-              style={{marginTop: 2}}
-              title="LOGIN AS A GUEST"
-              type="solid"
-              onPress={() => this._onPressLoginButton()}
-            />
+            <View>
+              <Button
+                style={{marginTop: 5}}
+                title="LOGIN WITH GOOGLE"
+                type="outline"
+                onPress={() => Alert.alert('Info', 'This process under Construction')}
+              />
+              <Button
+                style={{marginTop: 5}}
+                title="LOGIN WITH FACEBOOK"
+                type="outline"
+                onPress={() => Alert.alert('Info', 'This process under Construction')}
+              />
+            </View>
             <View style={{alignItems: 'flex-end'}}>
               <Text
                 style={{
