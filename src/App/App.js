@@ -12,7 +12,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
-import Home from '../Home/Home';
+import HomeTab from '../Home/HomeTab';
+import Const from '../Common/Const';
 
 const Stack = createStackNavigator();
 
@@ -31,9 +32,9 @@ export default function App() {
           options={{title: 'Register'}}
         />
         <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{title: 'Home'}}
+          name= "Home"
+          component={HomeTab}
+          options={{title: Const.SYSTEM.ORG_NAME}}
         />
       </Stack.Navigator>
     </NavigationContainer>

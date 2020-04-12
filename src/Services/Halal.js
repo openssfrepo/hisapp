@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Alert, Button, View} from 'react-native';
-export default class Event extends Component {
+export default class Halal extends Component {
   constructor(){
     super();
   }
@@ -8,8 +8,8 @@ export default class Event extends Component {
     return (
       <View>
       <Button
-        title="Event Page Alert"
-        onPress={() => Alert.alert('Event Page Working!')}
+        title="Halal Page Alert"
+        onPress={() => Alert.alert('Halal Page Working!')}
       />
       </View>
     );

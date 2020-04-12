@@ -1,17 +1,16 @@
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import * as React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Dashboard from '../Dashboard/Dashboard';
 import Event from '../Event/Event';
-import Donation from '../Donation/Donation';
+import Dashboard from '../Dashboard/Dashboard';
+import Halal from '../Services/Halal';
 
-const Tab = createBottomTabNavigator();
-
+const Tab = createMaterialTopTabNavigator();
 export default function Home() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Dashboard" component={Dashboard} />
       <Tab.Screen name="Event" component={Event} />
-      <Tab.Screen name="Donation" component={Donation} />
+      <Tab.Screen name="Service" component={Halal} />
     </Tab.Navigator>
   );
 }

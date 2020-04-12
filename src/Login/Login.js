@@ -8,7 +8,8 @@ import {
   StyleSheet,
   ImageBackground,
 } from 'react-native';
-import {Button, Card} from 'react-native-elements';
+import {Button} from 'react-native-elements';
+import {Card} from '../Custom/Card';
 export default class Login extends Component {
   constructor() {
     super();
@@ -20,14 +21,14 @@ export default class Login extends Component {
   render() {
     return (
       <ImageBackground
-        source={require('../Images/background.jpg')}
+        source={require('../Assests/Images/background.jpg')}
         style={{width: '100%', height: '100%'}}>
         <View style={{margin: 10}}>
-          <Card title="WELCOME">
+          <Card>
             <View style={{alignItems: 'center'}}>
               <Image
-                source={require('../Images/hislogo.png')}
-                style={{width: 200, height: 200}}
+                source={require('../Assests/Images/hislogo.png')}
+                style={{width: 200, height: 200,  resizeMode: 'contain'}}
               />
             </View>
             <View style={styles.textInputContainer}>
@@ -100,7 +101,7 @@ export default class Login extends Component {
     );
   }
   _onPressLoginButton() {
-    this.props.navigation.navigate('Home');
+    this.props.navigation.replace('Home');
   }
 }
 const styles = StyleSheet.create({

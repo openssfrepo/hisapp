@@ -3,11 +3,13 @@ import {
   Text,
   TextInput,
   ImageBackground,
-  Image,
   StyleSheet,
   View,
+  ToastAndroid,
 } from 'react-native';
-import {Button, Card} from 'react-native-elements';
+import {Button} from 'react-native-elements';
+import {Card} from '../Custom/Card';
+import Toast from 'react-native-tiny-toast';
 export default class Register extends Component {
   constructor() {
     super();
@@ -15,17 +17,27 @@ export default class Register extends Component {
       email: '',
       phone: '',
       password: '',
-      confirm_password:'',
+      confirm_password: '',
     };
   }
 
   render() {
     return (
       <ImageBackground
-        source={require('../Images/background.jpg')}
+        source={require('../Assests/Images/background.jpg')}
         style={{width: '100%', height: '100%'}}>
         <View style={{margin: 10}}>
-          <Card title="REGISTER">
+          <Card>
+            <Text>Your Name:</Text>
+            <View style={styles.textInputContainer}>
+              <TextInput
+                style={styles.inputStyle}
+                autoCorrect={false}
+                placeholder="profile name"
+                value={this.state.email}
+                onChangeText={email => this.setState({email})}
+              />
+            </View>
             <Text>Email Address:</Text>
             <View style={styles.textInputContainer}>
               <TextInput
@@ -41,7 +53,7 @@ export default class Register extends Component {
               <TextInput
                 style={styles.inputStyle}
                 autoCorrect={false}
-                keyboardType = 'numeric'
+                keyboardType="numeric"
                 placeholder="Phone Number"
                 value={this.state.phone}
                 onChangeText={phone => this.setState({phone})}
@@ -66,16 +78,18 @@ export default class Register extends Component {
                 secureTextEntry
                 placeholder="Confirm Password"
                 value={this.state.confirm_password}
-                onChangeText={confirm_password => this.setState({confirm_password})}
+                onChangeText={confirm_password =>
+                  this.setState({confirm_password})
+                }
               />
             </View>
-            
+
             <View>
               <Button
                 style={{marginTop: 2}}
-                title="LOGIN"
+                title="Submit"
                 type="solid"
-                onPress={() => this._onPressLoginButton()}
+                onPress={() => this._onPressRegisterButton()}
               />
             </View>
             <View style={{alignItems: 'flex-end'}}>
@@ -94,8 +108,9 @@ export default class Register extends Component {
       </ImageBackground>
     );
   }
-  _onPressLoginButton() {
-    this.props.navigation.navigate('Home');
+  _onPressRegisterButton() {
+    Toast.showSuccess('Registered');
+    this.props.navigation.replace('Login');
   }
 }
 const styles = StyleSheet.create({
