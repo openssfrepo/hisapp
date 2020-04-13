@@ -4,7 +4,7 @@ import Home from '../Home/Home';
 import Donation from '../Donation/Donation';
 import Timeline from '../Timeline/Timeline';
 import Setting from '../Setting/Setting';
-import Contact from '../Contact/Constact';
+import Contact from '../Contact/Contact';
 
 const Tab = createBottomTabNavigator();
 

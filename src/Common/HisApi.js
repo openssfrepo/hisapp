@@ -31,7 +31,7 @@ export default class HisApi {
         //     return response
         // })
         // .catch((error)=>{
-        //     console.error(error)
+        //     console.error(error) 
         // });
 
     }
