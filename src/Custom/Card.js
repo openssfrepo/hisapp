@@ -1,24 +1,23 @@
 import React from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import {View, StyleSheet} from 'react-native';
 
-const Card = (props) => {
+const Card = props => {
   let shadowStyle = {
     shadowColor: 'grey',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: .5,
+    shadowOffset: {width: 0, height: 0},
+    shadowOpacity: 0.5,
     shadowRadius: 1,
     elevation: 1,
-  }
+  };
   if (props.noShadow) {
-    shadowStyle = {}
+    shadowStyle = {};
   }
   return (
-    <View style={[styles.containerStyle, props.style, shadowStyle]}>
-      {props.children}
-    </View>
+      <View style={[styles.containerStyle, props.style, shadowStyle]}>
+        {props.children}
+      </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   containerStyle: {
@@ -27,7 +26,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     backgroundColor: 'white',
     borderRadius: 3,
-  }
-})
+  },
+});
 
-export { Card };
+export {Card};

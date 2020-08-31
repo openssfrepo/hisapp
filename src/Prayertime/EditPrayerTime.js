@@ -9,10 +9,23 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-//import { Card, Button, Icon } from 'react-native-elements'
 import {Card} from '../Custom/Card';
 import {Col, Row, Grid} from 'react-native-easy-grid';
-export default class Prayertime extends Component {
+import DateTimePicker from 'react-native-modal-datetime-picker';
+export default class EditPrayertime extends Component {
+  state = {
+    sehri_start: ['test'],
+    sehri_end: '',
+    isDateTimePickerVisible: false,
+  };
+  _showDateTimePicker = () => this.setState({isDateTimePickerVisible: true});
+
+  _hideDateTimePicker = () => this.setState({isDateTimePickerVisible: false});
+  _handleTimePicked = time => {
+    this.setState({sehri_start: time.toString()})
+    console.log('A date has been picked: ', time.toString());
+    this._hideDateTimePicker();
+  };
   constructor() {
     super();
   }
@@ -46,10 +59,10 @@ export default class Prayertime extends Component {
                         <Text>Shehri</Text>
                       </Col>
                       <Col style={styles.colStyle}>
-                        <Text>3</Text>
+                        <Text>03:10 AM</Text>
                       </Col>
                       <Col style={styles.colStyle}>
-                        <Text>4</Text>
+                        <Text>04:00 AM</Text>
                       </Col>
                     </Row>
                     <Row>
@@ -73,7 +86,7 @@ export default class Prayertime extends Component {
                           padding: 5,
                           width: '66.7%',
                         }}>
-                        <Text>3</Text>
+                        <Text>04:10 AM</Text>
                       </Col>
                     </Row>
                     <Row>
@@ -225,10 +238,18 @@ export default class Prayertime extends Component {
                   </Col>
                 </Grid>
                 <View style={styles.lineStyle} />
-                <Button
-                  title="Edit"
-                  onPress={() => this.props.navigation.navigate('EditPrayertime')}
-                />
+                <View style={{flex: 1}}>
+                  <TouchableOpacity onPress={this._showDateTimePicker}>
+                    <Text>{this.state.sehri_start}</Text>
+                  </TouchableOpacity>
+                  <DateTimePicker
+                  date={new Date().getTime}
+                    mode={'time'}
+                    isVisible={this.state.isDateTimePickerVisible}
+                    onConfirm={this._handleTimePicked}
+                    onCancel={this._hideDateTimePicker}
+                  />
+                </View>
               </Card>
             </View>
           </ScrollView>

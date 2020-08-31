@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import {Button} from 'react-native-elements';
 import {Card} from '../Custom/Card';
+import SelectInput from 'react-native-select-input-ios';
+import {Col, Row, Grid} from 'react-native-easy-grid';
 export default class Login extends Component {
   constructor() {
     super();
@@ -19,16 +21,35 @@ export default class Login extends Component {
     };
   }
   render() {
+    const options = [
+      {value: 0, label: 'General'},
+      {value: 1, label: 'Admin'},
+      {value: 2, label: 'Service proprietor '},
+    ];
     return (
       <ImageBackground
         source={require('../Assests/Images/background.jpg')}
         style={{width: '100%', height: '100%'}}>
-        <View style={{margin: 10}}>
+        <View style={{margin: 1}}>
           <Card>
+            <View style={styles.textInputContainer}>
+              <Grid>
+                <Col>
+                  <View style={{padding: 5}}>
+                    <Text>Select Login User Type</Text>
+                  </View>
+                </Col>
+                <Col>
+                  <View style={styles.userType}>
+                    <SelectInput value={0} options={options} />
+                  </View>
+                </Col>
+              </Grid>
+            </View>
             <View style={{alignItems: 'center'}}>
               <Image
                 source={require('../Assests/Images/hislogo.png')}
-                style={{width: 200, height: 200,  resizeMode: 'contain'}}
+                style={{width: 200, height: 200, resizeMode: 'contain'}}
               />
             </View>
             <View style={styles.textInputContainer}>
@@ -75,13 +96,17 @@ export default class Login extends Component {
                 style={{marginTop: 5}}
                 title="LOGIN WITH GOOGLE"
                 type="outline"
-                onPress={() => Alert.alert('Info', 'This process under Construction')}
+                onPress={() =>
+                  Alert.alert('Info', 'This process under Construction')
+                }
               />
               <Button
                 style={{marginTop: 5}}
                 title="LOGIN WITH FACEBOOK"
                 type="outline"
-                onPress={() => Alert.alert('Info', 'This process under Construction')}
+                onPress={() =>
+                  Alert.alert('Info', 'This process under Construction')
+                }
               />
             </View>
             <View style={{alignItems: 'flex-end'}}>
@@ -116,5 +141,11 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 40,
     marginLeft: 5,
+  },
+  userType: {
+    borderWidth: 1,
+    padding: 7,
+    borderColor: 'black',
+    borderRadius: 10,
   },
 });

@@ -4,17 +4,15 @@ import {
     Alert,
     Button,
   } from 'react-native';
-import Chat from './Chat';
-import QandA from './QandA';
-import Feed from './Feed';
+import Halal from './Halal';
+import School from './School';
 
   const Tab = createMaterialTopTabNavigator();
-  export default function Timeline() {
+  export default function Services() {
     return (
       <Tab.Navigator>
-        <Tab.Screen name="Feed" component={Feed} />
-        <Tab.Screen name="Chat" component={Chat} />
-        <Tab.Screen name="Ask Imam" component={QandA} />
+        <Tab.Screen name="Halal" component={Halal} />
+        <Tab.Screen name="School" component={School} />
       </Tab.Navigator>
     );
   }

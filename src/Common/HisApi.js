@@ -1,7 +1,7 @@
 import React from 'react';
 import Const from '../Common/Const';
 
-var _url = 'http://localhost:4001/getAllUser';
+var _url = 'http://localhost:8080/user/getAll';
 var _login = null;
 
 export default class HisApi {
@@ -16,28 +16,20 @@ export default class HisApi {
     return _login;
   }
   static async getAllUser() {
-    // var method = 'GET'
-    // var request = {
-    //     "request": "getAllUser"
-    // }
-    // try{
-    //     _login = await this._callHisApi(method,request)
-    //     return _login
-    // } catch(e) {
-    //     throw(e)
-    // }
-    // return fetch(_url).then((response) => {
-    //     console.log(response)
-    //     return response
-    // })
-    // .catch((error)=>{
-    //     console.error(error)
-    // });
-    await fetch('http://localhost:4001/getAllUser')
+    var myHeaders = new Headers();
+    myHeaders.append('Authorization', 'Basic SElTX1VTRVI6SElTX1BBU1M=');
+    myHeaders.append('Cookie', 'JSESSIONID=0D778C92C129CE434EBDA41538C92EBB');
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+    fetch('http://localhost:8080/user/getAll', requestOptions)
       .then(response => response.json())
       .then(responseJson => {
-          console.log(responseJson)
-          _login = responseJson
+        console.log(responseJson);
+        _login = responseJson;
       })
       .catch(error => {
         console.error(error);
@@ -60,12 +52,5 @@ export default class HisApi {
     } catch (e) {
       throw e;
     }
-    // const response = await result.json()
-    // console.log(response)
-    // if(response.result){
-    //     return response
-    // } else{
-    //     return
-    // }
   }
 }

@@ -11,8 +11,8 @@ import {Card} from '../Custom/Card';
 import {Avatar} from 'react-native-elements';
 import HisApi from '../Common/HisApi';
 
-export default class Contact extends Component {
-  _contactList = [];
+  export default class Contribution extends Component {
+    _contributionList = [];
   constructor(props) {
     super(props);
 
@@ -20,7 +20,6 @@ export default class Contact extends Component {
       dataSource: [],
     };
   }
-
   componentDidMount() {
     HisApi.getAllUser()
     const list = HisApi.getLoginInfo()
@@ -29,18 +28,19 @@ export default class Contact extends Component {
     })
 
   }
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
         <FlatList
           data={this.state.dataSource}
-          renderItem={item => this._renderContactList(item)}
+          renderItem={item => this._renderContributionList(item)}
           keyExtractor={item => item.id.toString()}
         />
       </SafeAreaView>
     );
   }
-  _renderContactList = data => (
+  _renderContributionList = data => (
     <TouchableOpacity style={styles.item}>
       <Card>
         <View
@@ -48,7 +48,7 @@ export default class Contact extends Component {
           <Avatar
             size="small"
             rounded
-            //title={data.item.userName.length > 1 ? data.userName.substring(0,2) : data.userName.substring(0,1)}
+            title={data.item.Name.length > 1 ? data.item.Name.substring(0,2) : data.item.Name.substring(0,1)}
             onPress={() => console.log('Works!')}
             activeOpacity={0.7}
           />
@@ -57,17 +57,17 @@ export default class Contact extends Component {
       </Card>
     </TouchableOpacity>
   );
-}
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 5,
-  },
-  item: {
-    // marginVertical: 3,
-    // marginHorizontal: 3,
-  },
-  title: {
-    fontSize: 32,
-  },
-});
+  }
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      marginTop: 5,
+    },
+    item: {
+      // marginVertical: 3,
+      // marginHorizontal: 3,
+    },
+    title: {
+      fontSize: 32,
+    },
+  });
