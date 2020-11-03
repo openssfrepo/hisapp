@@ -12,6 +12,7 @@ import {Button} from 'react-native-elements';
 import {Card} from '../Custom/Card';
 import SelectInput from 'react-native-select-input-ios';
 import {Col, Row, Grid} from 'react-native-easy-grid';
+import HisApi from '../Common/HisApi';
 export default class Login extends Component {
   constructor() {
     super();
@@ -126,6 +127,27 @@ export default class Login extends Component {
     );
   }
   _onPressLoginButton() {
+    
+    fetch('http://localhost:4001/authLogin', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+
+      },
+      body: JSON.stringify({
+        "username": "test",
+        "password": "test",
+     })
+    })
+      .then(response => response.json())
+      .then(responseJson => {
+        console.log(responseJson);
+        //_login = responseJson;
+      })
+      .catch(error => {
+        console.error(error);
+      });
     this.props.navigation.replace('Home');
   }
 }

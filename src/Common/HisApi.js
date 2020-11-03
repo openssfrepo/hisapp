@@ -15,6 +15,21 @@ export default class HisApi {
   static getLoginInfo() {
     return _login;
   }
+  static async login() {
+    var body = {
+      username: 'test',
+      password: 'test',
+    };
+    fetch('http://localhost:4001/authLogin',body)
+      .then(response => response.json())
+      .then(responseJson => {
+        console.log(responseJson);
+        _login = responseJson;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
   static async getAllUser() {
     var myHeaders = new Headers();
     myHeaders.append('Authorization', 'Basic SElTX1VTRVI6SElTX1BBU1M=');
