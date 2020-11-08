@@ -1,71 +1,52 @@
 import React from 'react';
 import Const from '../Common/Const';
 
-var _url = 'http://localhost:8080/user/getAll';
+var _url = 'http://localhost:4001/';
 var _login = null;
+var _response = null;
+const _GET = 'GET';
+const _POST = 'POST';
+const _PUT = 'PUT';
+const _DELETE = 'DELETE';
+const _headerOptions = {
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+};
 
-export default class HisApi {
-  static setUrl(url) {
-    _url = url;
-    return;
-  }
-  static getUrl() {
-    return _url;
-  }
-  static getLoginInfo() {
-    return _login;
-  }
-  static async login() {
-    var body = {
-      username: 'test',
-      password: 'test',
+exports.getResponseData = function() {
+  return _response;
+};
+exports.login = function() {
+  var url = _url + 'authLogin';
+  var body = JSON.stringify({
+    username: 'test',
+    password: 'test',
+  });
+  return JSON.stringify(this._callHisApi(url, _POST, body));
+};
+exports.getPrayerInfo = function(prayerDate) {
+  var url = _url + 'prayerSelectOne';
+  var body = JSON.stringify({
+    prayerDate: prayerDate,
+  });
+  return JSON.stringify(this._callHisApi(url, _POST, body));
+};
+exports._callHisApi = function(apiUrl, methodName, itemBody) {
+  try {
+    var options = {
+      method: methodName,
+      headers: _headerOptions,
+      body: itemBody,
     };
-    fetch('http://localhost:4001/authLogin',body)
+    fetch(apiUrl, options)
       .then(response => response.json())
       .then(responseJson => {
-        console.log(responseJson);
-        _login = responseJson;
+        return responseJson;
       })
       .catch(error => {
         console.error(error);
       });
-  }
-  static async getAllUser() {
-    var myHeaders = new Headers();
-    myHeaders.append('Authorization', 'Basic SElTX1VTRVI6SElTX1BBU1M=');
-    myHeaders.append('Cookie', 'JSESSIONID=0D778C92C129CE434EBDA41538C92EBB');
-
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow',
-    };
-    fetch('http://localhost:8080/user/getAll', requestOptions)
-      .then(response => response.json())
-      .then(responseJson => {
-        console.log(responseJson);
-        _login = responseJson;
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
-  static async _callHisApi(method, request) {
-    var url = HisApi.getUrl() + '/' + request.request;
-    var header = {
-      method: method,
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(request),
-    };
-    var result;
-    try {
-      result = await fetch(_url);
-      return result.json();
-    } catch (e) {
-      throw e;
-    }
+  } catch (e) {
+    throw e;
   }
 }

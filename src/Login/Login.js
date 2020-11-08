@@ -13,13 +13,18 @@ import {Card} from '../Custom/Card';
 import SelectInput from 'react-native-select-input-ios';
 import {Col, Row, Grid} from 'react-native-easy-grid';
 import HisApi from '../Common/HisApi';
+import UserInfo from '../testdata/loginData'
 export default class Login extends Component {
+  _loginInfo = [];
   constructor() {
     super();
     this.state = {
       text: '',
       password: '',
     };
+  }
+  componentDidMount() {
+
   }
   render() {
     const options = [
@@ -127,27 +132,34 @@ export default class Login extends Component {
     );
   }
   _onPressLoginButton() {
-    
-    fetch('http://localhost:4001/authLogin', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+    var data = HisApi.login();
+    if(data === null){
+      data = HisApi.login();
+      Alert.alert('Variable "comment" is null.');
+      console.log(data);
+    }else{
+      console.log(data);
+    }
+    // fetch('http://localhost:4001/authLogin', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json',
 
-      },
-      body: JSON.stringify({
-        "username": "test",
-        "password": "test",
-     })
-    })
-      .then(response => response.json())
-      .then(responseJson => {
-        console.log(responseJson);
-        //_login = responseJson;
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    //   },
+    //   body: JSON.stringify({
+    //     "username": "test",
+    //     "password": "test",
+    //  })
+    // })
+    //   .then(response => response.json())
+    //   .then(responseJson => {
+    //     console.log(responseJson);
+    //     //_login = responseJson;
+    //   })
+    //   .catch(error => {
+    //     console.error(error);
+    //   });
     this.props.navigation.replace('Home');
   }
 }

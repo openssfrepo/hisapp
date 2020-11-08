@@ -1,81 +1,49 @@
-import React, {Component} from 'react';
-import {View, Text, StyleSheet, TextInput, Button, KeyboardAvoidingView} from 'react-native';
+import React, {useState, useCallback, useEffect} from 'react';
+import {GiftedChat} from 'react-native-gifted-chat';
+import {ImageBackground} from 'react-native';
 import io from 'socket.io-client';
-export default class Chat extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      chatMessage: '',
-      chatMessages: [],
-    };
-  }
-  componentDidMount() {
+
+export default (chat = () => {
+  const [messages, setMessages] = useState([]);
+  const [text, setText] = useState();
+  useEffect(() => {
     this.socket = io('http://127.0.0.1:4001');
     this.socket.on('chat message', msg => {
-      this.setState({chatMessages: [...this.state.chatMessages, msg]});
+      var obj = JSON.parse(msg);
+      setMessages(previousMessages =>
+        GiftedChat.append(previousMessages,[
+          {
+            _id: obj[0]._id,
+            text: obj[0].text,
+            createdAt: obj[0].createdAt,
+            user: {
+              _id: obj[0].user._id,
+              name: obj[0].user.name,
+              avatar: obj[0].user.avatar,
+            },
+          },
+        ]));
     });
-  }
-  render() {
-    const chatMessages = this.state.chatMessages.map(chatMessage => (
-      <Text style={{borderWidth: 2, top: 500}}>{chatMessage}</Text>
-    ));
-    return (
-      // <View style={styles.container}>
-      //   {chatMessages}
-      //   <TextInput
-      //     style={{height: 40, borderWidth: 2, top: 600}}
-      //     autoCorrect={false}
-      //     value={this.state.chatMessage}
-      //     onSubmitEditing={() => this.submitChatMessage()}
-      //     onChangeText={chatMessage => {
-      //       this.setState({chatMessage});
-      //     }}
-      //   />
-      // </View>
-      <View style={styles.container}>
-      {chatMessages}
-        <KeyboardAvoidingView
-          style={{position: 'absolute', left: 0, right: 0, bottom: 0}}
-          behavior="position">
-          <TextInput
-            style={styles.input}
-            autoCorrect={false}
-            value={this.state.chatMessage}
-            onSubmitEditing={() => this.submitChatMessage()}
-            onChangeText={chatMessage => {
-              this.setState({chatMessage});
-            }}
-            underlineColorAndroid="transparent"
-          />
-          <Button onPress={() => this.submitChatMessage()} title="SEND" />
-        </KeyboardAvoidingView>
-      </View>
-    );
-  }
-  submitChatMessage() {
-    this.socket.emit('chat message', this.state.chatMessage);
-    this.setState({chatMessage: ''});
-  }
-}
-// const styles = StyleSheet.create({
-//   container: {
-//     height: 400,
-//     flex: 1,
-//     backgroundColor: '#F5FCFF',
-//   },
-// });
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    position: 'relative',
-    bottom: 0,
-  },
-  input: {
-    backgroundColor: 'red',
-    width: '100%',
-    height: 40,
-    color: '#ffffff',
-    position: 'absolute', left: 0, right: 0, bottom: 0
-  },
+  }, []);
+  const onSend = (messages) => {
+    this.socket.emit('chat message', JSON.stringify(messages));
+  };
+  return (
+    <ImageBackground
+    source={require('../Assests/Images/hisback.jpg')}
+    style={{flex: 1}}>
+    <GiftedChat
+      messages={messages}
+      onInputTextChanged={text => setText(text)}
+      onSend={(messages)=> onSend(messages)}
+      user={{
+        _id: 1,
+        name: 'chat Screen',
+        avatar: 'https://placeimg.com/140/140/animals',
+      }}
+      showUserAvatar
+      renderUsernameOnMessage
+    />
+    </ImageBackground>
+  );
 });
