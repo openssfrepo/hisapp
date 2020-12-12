@@ -7,20 +7,21 @@ import {
   Image,
   StyleSheet,
   ImageBackground,
+  AsyncStorage
 } from 'react-native';
 import {Button} from 'react-native-elements';
 import {Card} from '../Custom/Card';
 import SelectInput from 'react-native-select-input-ios';
 import {Col, Row, Grid} from 'react-native-easy-grid';
 import HisApi from '../Common/HisApi';
-import UserInfo from '../testdata/loginData'
 export default class Login extends Component {
   _loginInfo = [];
   constructor() {
     super();
     this.state = {
-      text: '',
+      username: '',
       password: '',
+      userInfo: []
     };
   }
   componentDidMount() {
@@ -63,8 +64,8 @@ export default class Login extends Component {
                 style={styles.inputStyle}
                 autoCorrect={false}
                 placeholder="Email or Username"
-                value={this.state.text}
-                onChangeText={text => this.setState({text})}
+                value={this.state.username}
+                onChangeText={text => this.setState({username:text})}
               />
             </View>
             <View style={styles.textInputContainer}>
@@ -74,7 +75,7 @@ export default class Login extends Component {
                 secureTextEntry
                 placeholder="Password"
                 value={this.state.password}
-                onChangeText={password => this.setState({password})}
+                onChangeText={password => this.setState({password:password})}
               />
             </View>
             <View style={{padding: 5, alignItems: 'flex-end'}}>
@@ -132,34 +133,9 @@ export default class Login extends Component {
     );
   }
   _onPressLoginButton() {
-    var data = HisApi.login();
-    if(data === null){
-      data = HisApi.login();
-      Alert.alert('Variable "comment" is null.');
-      console.log(data);
-    }else{
-      console.log(data);
-    }
-    // fetch('http://localhost:4001/authLogin', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json',
-
-    //   },
-    //   body: JSON.stringify({
-    //     "username": "test",
-    //     "password": "test",
-    //  })
-    // })
-    //   .then(response => response.json())
-    //   .then(responseJson => {
-    //     console.log(responseJson);
-    //     //_login = responseJson;
-    //   })
-    //   .catch(error => {
-    //     console.error(error);
-    //   });
+    HisApi.login('test','test').then(_login=>{
+      AsyncStorage.setItem('userInfo', JSON.stringify(_login));
+    });
     this.props.navigation.replace('Home');
   }
 }

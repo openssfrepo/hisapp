@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import {Card} from '../Custom/Card';
 import {Col, Row, Grid} from 'react-native-easy-grid';
+import SearchBar from 'react-native-search-bar';
 export default class Halal extends Component {
   constructor() {
     super();
@@ -21,6 +22,17 @@ export default class Halal extends Component {
       <ImageBackground
         source={require('../Assests/Images/hisback.jpg')}
         style={{width: '100%', height: '100%'}}>
+        <SearchBar
+          onChangeText={search => {
+            this.setState({search: search});
+          }}
+          onSearchButtonPress={search => {
+            this.setState({search: search});
+          }}
+          onCancelButtonPress={search => {
+            this.setState({search: search});
+          }}
+        />
         <SafeAreaView>
           <ScrollView>
             <View>

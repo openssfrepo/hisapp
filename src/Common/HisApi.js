@@ -1,6 +1,4 @@
-import React from 'react';
 import Const from '../Common/Const';
-
 var _url = 'http://localhost:4001/';
 var _login = null;
 var _response = null;
@@ -13,32 +11,36 @@ const _headerOptions = {
   'Content-Type': 'application/json',
 };
 
-exports.getResponseData = function() {
-  return _response;
+exports.getloginInfo = function() {
+  return _login;
 };
-exports.login = function() {
+exports.login = function(user,pass) {
   var url = _url + 'authLogin';
   var body = JSON.stringify({
-    username: 'test',
-    password: 'test',
+    username: user,
+    password: pass,
   });
-  return JSON.stringify(this._callHisApi(url, _POST, body));
+  return _callHisApi(url, _POST, body).then(res => {
+    return res;
+  });
 };
 exports.getPrayerInfo = function(prayerDate) {
   var url = _url + 'prayerSelectOne';
   var body = JSON.stringify({
     prayerDate: prayerDate,
   });
-  return JSON.stringify(this._callHisApi(url, _POST, body));
+  return _callHisApi(url, _POST, body).then(res => {
+    return res;
+  });
 };
-exports._callHisApi = function(apiUrl, methodName, itemBody) {
+function _callHisApi(apiUrl, methodName, itemBody) {
   try {
     var options = {
       method: methodName,
       headers: _headerOptions,
       body: itemBody,
     };
-    fetch(apiUrl, options)
+    return fetch(apiUrl, options)
       .then(response => response.json())
       .then(responseJson => {
         return responseJson;

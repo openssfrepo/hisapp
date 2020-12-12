@@ -11,6 +11,7 @@ import {
 //import { Card, Button, Icon } from 'react-native-elements'
 import {Card} from '../Custom/Card';
 import {Col, Row, Grid} from 'react-native-easy-grid';
+import HisApi from '../Common/HisApi';
 export default class Prayertime extends Component {
   constructor() {
     super();
@@ -19,16 +20,11 @@ export default class Prayertime extends Component {
     };
   }
   componentDidMount() {
-    // var _response = HisApi.getPrayerInfo("2020/11/08");
-    // console.log(_response);
-    // this.setState({
-    //   _prayerInfo: JSON.parse(_response.results)
-    // })
-    var url = 'http://localhost:4001/' + 'prayerSelectOne';
-    var body = JSON.stringify({
-      prayerDate: '2020/11/08',
+    HisApi.getPrayerInfo('2020/11/08').then(response =>{
+      this.setState({
+        _prayerInfo: response.results[0],
+      });
     });
-    this._callHisApi(url, 'POST', body);
   }
   render() {
     return (
@@ -278,31 +274,6 @@ export default class Prayertime extends Component {
         </SafeAreaView>
       </ImageBackground>
     );
-  }
-  _callHisApi(apiUrl, methodName, itemBody) {
-    try {
-      const _headerOptions = {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      };
-      var options = {
-        method: methodName,
-        headers: _headerOptions,
-        body: itemBody,
-      };
-      fetch(apiUrl, options)
-        .then(response => response.json())
-        .then(responseJson => {
-          this.setState({
-            _prayerInfo: responseJson.results[0],
-          });
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    } catch (e) {
-      throw e;
-    }
   }
 }
 const styles = StyleSheet.create({
