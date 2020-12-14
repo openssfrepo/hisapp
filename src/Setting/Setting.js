@@ -11,7 +11,6 @@ import {Button} from 'react-native-elements';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 
 class Setting extends React.Component {
-  // TODO: implement your navigationOptions
   state = {
     check: true,
     switch: true,
