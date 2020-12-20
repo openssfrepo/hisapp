@@ -231,6 +231,8 @@ PODS:
     - React
   - RNSearchBar (3.5.1):
     - React
+  - RNSettingsPage (1.0.0):
+    - React
   - RNVectorIcons (6.7.0):
     - React
   - Yoga (1.14.0)
@@ -270,6 +272,7 @@ DEPENDENCIES:
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSearchBar (from `../node_modules/react-native-search-bar`)
+  - RNSettingsPage (from `../node_modules/react-native-settings-page/ios`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -340,6 +343,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNSearchBar:
     :path: "../node_modules/react-native-search-bar"
+  RNSettingsPage:
+    :path: "../node_modules/react-native-settings-page/ios"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   Yoga:
@@ -378,9 +383,10 @@ SPEC CHECKSUMS:
   RNReanimated: 031fe8d9ea93c2bd689a40f05320ef9d96f74d7f
   RNScreens: 03bf608b92ac0acf323f47d8f5b63a8f829340c8
   RNSearchBar: 54ad41edd78385681730b02b5e069900436d996b
+  RNSettingsPage: 8c103cbcc01488cd0cd65d9128b5be5f517f0174
   RNVectorIcons: 368d6d8b8301224e5ffb6254191f4f8876c2be0d
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
 PODFILE CHECKSUM: b7fc4fc5aaa56b33f05d91866c6fa707684a21d0
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.0
