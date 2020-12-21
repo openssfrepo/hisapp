@@ -235,6 +235,8 @@ PODS:
     - React
   - RNVectorIcons (6.7.0):
     - React
+  - toolbar-android (0.1.0-rc.2):
+    - React
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -274,6 +276,7 @@ DEPENDENCIES:
   - RNSearchBar (from `../node_modules/react-native-search-bar`)
   - RNSettingsPage (from `../node_modules/react-native-settings-page/ios`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
+  - "toolbar-android (from `../node_modules/@react-native-community/toolbar-android`)"
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -347,6 +350,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-settings-page/ios"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
+  toolbar-android:
+    :path: "../node_modules/@react-native-community/toolbar-android"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -385,6 +390,7 @@ SPEC CHECKSUMS:
   RNSearchBar: 54ad41edd78385681730b02b5e069900436d996b
   RNSettingsPage: 8c103cbcc01488cd0cd65d9128b5be5f517f0174
   RNVectorIcons: 368d6d8b8301224e5ffb6254191f4f8876c2be0d
+  toolbar-android: 404f4450b203597e7b417f714ff417bed562a1be
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
 PODFILE CHECKSUM: b7fc4fc5aaa56b33f05d91866c6fa707684a21d0
