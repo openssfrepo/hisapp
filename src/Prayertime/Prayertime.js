@@ -20,7 +20,7 @@ export default class Prayertime extends Component {
     };
   }
   componentDidMount() {
-    HisApi.getPrayerInfo('2020/11/08').then(response =>{
+    HisApi.getPrayerInfo('2020/12/27').then(response =>{
       this.setState({
         _prayerInfo: response.results[0],
       });
@@ -91,10 +91,10 @@ export default class Prayertime extends Component {
                         <Text>Iftar</Text>
                       </Col>
                       <Col style={styles.colStyle}>
-                        <Text>3</Text>
+                        <Text>{this.state._prayerInfo.iftarStart}</Text>
                       </Col>
                       <Col style={styles.colStyle}>
-                        <Text>4</Text>
+                        <Text>{this.state._prayerInfo.iftarFinish}</Text>
                       </Col>
                     </Row>
                     <Row>
